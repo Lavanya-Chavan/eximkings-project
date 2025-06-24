@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EXIM Kings International</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: url("C://Users//lavan_25o8qv3//Documents//workspace-spring-tools-for-eclipse-4.31.0.RELEASE//eximkings//frontend//Screenshot 2025-06-23 232351.png") no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 120px 0 80px; /* Reduced top space */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      color: white;
+      text-align: center;
+      margin: 0;
+    }
+
+    .container-boxes {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      padding: 20px 10px;
+      gap: 15px; /* Reduced gap */
+    }
+
+    .card-box {
+      width: 220px;
+      background: black;
+      border: 2px solid white;
+      border-radius: 15px;
+      padding: 25px 15px;
+      text-align: center;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card-box:hover {
+      transform: scale(1.05);
+    }
+
+    .card-box i {
+      font-size: 50px;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    .box-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    footer {
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .btn-brown {
+      background-color: brown;
+      color: white;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-weight: bold;
+      border: none;
+      text-decoration: none;
+    }
+
+    .btn-brown:hover {
+      background-color: #5a2e0f;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>EXIM Kings International</h1>
+  </header>
+
+  <!-- Main Cards -->
+  <main class="container-boxes">
+    <div class="card-box" onclick="openModal('client')">
+      <i class="fas fa-user-tie"></i>
+      <div class="box-title">Client</div>
+    </div>
+
+    <div class="card-box" onclick="openModal('vendor')">
+      <i class="fas fa-truck"></i>
+      <div class="box-title">Vendor</div>
+    </div>
+
+    <div class="card-box" onclick="openModal('estimation')">
+      <i class="fas fa-calculator"></i>
+      <div class="box-title">Estimation</div>
+    </div>
+
+    <div class="card-box" onclick="openModal('reports')">
+      <i class="fas fa-chart-line"></i>
+      <div class="box-title">Reports</div>
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal fade" id="cardModal" tabindex="-1" aria-labelledby="cardModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-light text-center p-4 rounded">
+        <div class="modal-header border-0">
+          <h5 class="modal-title w-100" id="cardModalLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="modalOptions">
+          <!-- Buttons will be injected dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    Contact: +91-788 738 8590 | contact@eximk.com |
+    <a href="https://www.eximk.com" target="_blank">https://www.eximk.com</a><br/>
+    © 2025 EXIM Kings International. All rights reserved.
+  </footer>
+
+  <!-- Script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const modalData = {
+      client: {
+        title: "Client Options",
+        buttons: [
+          { label: "ADD", link: "client_add.html" },
+          { label: "UPDATE", link: "client_up.html" },
+          { label: "DELETE", link: "client_del.html" },
+          { label: "SEARCH", link: "client_search.html" }
+        ]
+      },
+      vendor: {
+        title: "Vendor Options",
+        buttons: [
+          { label: "ADD", link: "vendor_add.html" },
+          { label: "UPDATE", link: "vendor_update.html" },
+          { label: "DELETE", link: "vendor_delete.html" },
+          { label: "SEARCH", link: "vendor_search.html" }
+        ]
+      },
+      estimation: {
+        title: "Estimation Options",
+        buttons: [
+          { label: "JUTE BAG", link: "estimation_jute.html" },
+          { label: "PAPER BAG", link: "estimation_paper.html" }
+        ]
+      },
+      reports: {
+        title: "Report Options",
+        buttons: [
+          { label: "MONTHLY", link: "report_monthly.html" },
+          { label: "QUARTERLY", link: "report_quarterly.html" },
+          { label: "YEARLY", link: "report_yearly.html" }
+        ]
+      }
+    };
+
+    function openModal(type) {
+      const modal = new bootstrap.Modal(document.getElementById('cardModal'));
+      const data = modalData[type];
+      document.getElementById('cardModalLabel').innerText = data.title;
+
+      const modalOptions = document.getElementById('modalOptions');
+      modalOptions.innerHTML = '';
+
+      data.buttons.forEach(btn => {
+        const link = document.createElement('a');
+        link.href = btn.link;
+        link.className = 'btn btn-brown m-2';
+        link.innerText = btn.label;
+        modalOptions.appendChild(link);
+      });
+
+      modal.show();
+    }
+  </script>
+</body>
+</html>

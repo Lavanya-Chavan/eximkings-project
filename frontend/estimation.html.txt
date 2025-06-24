@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bag Estimation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container py-4">
+  <h2>Estimation Form</h2>
+  <form id="estimateForm">
+    <input type="text" id="shape" class="form-control mb-2" placeholder="Bag Shape" required>
+    <input type="text" id="size" class="form-control mb-2" placeholder="Size (e.g., 12x18)" required>
+    <input type="number" id="quantity" class="form-control mb-2" placeholder="Quantity" required>
+    <input type="text" id="material" class="form-control mb-2" placeholder="Material (Jute/Paper)" required>
+    <button class="btn btn-warning" type="submit">Generate Estimate</button>
+  </form>
+
+  <div id="invoice" class="mt-4 d-none">
+    <h5>Invoice</h5>
+    <p id="invDetails"></p>
+    <button class="btn btn-success" onclick="window.print()">Print</button>
+  </div>
+
+  <script>
+    document.getElementById('estimateForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const cost = document.getElementById('quantity').value * 5;
+      const detail = `
+        Bag Type: ${material.value}<br>
+        Shape: ${shape.value}, Size: ${size.value}, Quantity: ${quantity.value}<br>
+        Estimated Cost: ₹${cost}
+      `;
+      document.getElementById('invDetails').innerHTML = detail;
+      document.getElementById('invoice').classList.remove('d-none');
+    });
+  </script>
+</body>
+</html>
